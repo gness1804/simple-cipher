@@ -41,7 +41,12 @@ export class SimpleCipher {
     }).join('');
   }
 
-  public decode(term: string) {
-    throw new Error('Remove this statement and implement this function')
+  public decode(term: string): string {
+    return term.split('').map((letter, index) => {
+      const howManyToSubtract = this.valueMapper.get(this.key[index]);
+      let newCharCode = letter.charCodeAt(0) - (howManyToSubtract || 0);
+      // if (newCharCode < 98) newCharCode = newCharCode + 122 - 97;
+      return String.fromCharCode(newCharCode);
+    }).join('');
   }
 }

@@ -34,13 +34,13 @@ describe('Random key cipher', () => {
     )
   })
 
-  xit('can decode', () => {
+  it('can decode', () => {
     expect(simpleCipher.decode(simpleCipher.key.substring(0, 10))).toEqual(
       'aaaaaaaaaa'
     )
   })
 
-  xit('is reversible', () => {
+  it('is reversible', () => {
     const plaintext = 'abcdefghij'
     expect(simpleCipher.decode(simpleCipher.encode(plaintext))).toEqual(
       plaintext
@@ -64,35 +64,47 @@ describe('Substitution cipher', () => {
     expect(simpleCipher.decode('abcdefghij')).toEqual('aaaaaaaaaa')
   })
 
-  xit('is reversible', () => {
+  it('is reversible', () => {
     expect(simpleCipher.decode(simpleCipher.encode('abcdefghij'))).toEqual(
       'abcdefghij'
     )
   })
 
-  xit(': double shift encode', () => {
+  it(': double shift encode', () => {
     expect(new SimpleCipher('iamapandabear').encode('iamapandabear')).toEqual(
       'qayaeaagaciai'
     )
   })
 
-  xit('can wrap on encode', () => {
+  it('can wrap on encode', () => {
     expect(simpleCipher.encode('zzzzzzzzzz')).toEqual('zabcdefghi')
   })
 
-  xit('can wrap on decode', () => {
+  it('can wrap on decode', () => {
     expect(simpleCipher.decode('zabcdefghi')).toEqual('zzzzzzzzzz')
   })
 
-  xit('can encode messages longer than the key"', () => {
+  it('can encode messages longer than the key"', () => {
     expect(new SimpleCipher('abc').encode('iamapandabear')).toEqual(
       'iboaqcnecbfcr'
     )
   })
 
-  xit('can decode messages longer than the key', () => {
+  it('can decode messages longer than the key', () => {
     expect(new SimpleCipher('abc').decode('iboaqcnecbfcr')).toEqual(
       'iamapandabear'
     )
   })
 })
+
+describe('encoding and decoding sanity checks', () => {
+  const key = 'ddddd';
+  const simpleCipher = new SimpleCipher(key)
+  it('encodes something', () => {
+    expect(simpleCipher.encode('yyyz')).toEqual('cccd')
+  });
+
+  it('decodes something', () => {
+    expect(simpleCipher.decode('cccd')).toEqual('yyyz')
+  });
+ })
