@@ -4,8 +4,8 @@ export class SimpleCipher {
   key: string;
   valueMapper: Map<string, number>;
 
-  constructor() {
-    this.key = this.randomize();
+  constructor(key?: string) {
+    this.key = key || this.randomize();
     this.valueMapper = this.buildValueMapper();
   }
 
@@ -32,8 +32,13 @@ export class SimpleCipher {
     return map;
   }
 
-  public encode(term: string) {
-    throw new Error('Remove this statement and implement this function')
+  public encode(term: string): string {
+    return term.split('').map((letter, index) => {
+      const howManyToBump = this.valueMapper.get(this.key[index]);
+      let newCharCode = letter.charCodeAt(0) + (howManyToBump || 0);
+      if (newCharCode > 122) newCharCode = newCharCode - 122 + 97;
+      return String.fromCharCode(newCharCode);
+    }).join('');
   }
 
   public decode(term: string) {

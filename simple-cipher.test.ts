@@ -21,10 +21,14 @@ describe('Random key cipher', () => {
     expect(simpleCipher.key.length).toBeGreaterThanOrEqual(100)
   })
 
+  it('generates a mapper of letters to shift values', () => {
+    expect(simpleCipher.valueMapper).toBeTruthy();
+  })
+
   // Here we take advantage of the fact that plaintext of "aaa..."
   // outputs the key. This is a critical problem with shift ciphers, some
   // characters will always output the key verbatim.
-  xit('can encode', () => {
+  it('can encode', () => {
     expect(simpleCipher.encode('aaaaaaaaaa')).toEqual(
       simpleCipher.key.substring(0, 10)
     )
@@ -48,15 +52,15 @@ describe('Substitution cipher', () => {
   const key = 'abcdefghij'
   const simpleCipher = new SimpleCipher(key)
 
-  xit('keeps the submitted key', () => {
+  it('keeps the submitted key', () => {
     expect(simpleCipher.key).toEqual(key)
   })
 
-  xit('can encode', () => {
+  it('can encode', () => {
     expect(simpleCipher.encode('aaaaaaaaaa')).toEqual('abcdefghij')
   })
 
-  xit('can decode', () => {
+  it('can decode', () => {
     expect(simpleCipher.decode('abcdefghij')).toEqual('aaaaaaaaaa')
   })
 
