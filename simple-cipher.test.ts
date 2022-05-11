@@ -84,7 +84,7 @@ describe('Substitution cipher', () => {
     expect(simpleCipher.decode('zabcdefghi')).toEqual('zzzzzzzzzz')
   })
 
-  it('can encode messages longer than the key"', () => {
+  it('can encode messages longer than the key', () => {
     expect(new SimpleCipher('abc').encode('iamapandabear')).toEqual(
       'iboaqcnecbfcr'
     )
