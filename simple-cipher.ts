@@ -43,7 +43,7 @@ export class SimpleCipher {
     return term.split('').map((letter, index) => {
       const howManyToBump = this.valueMapper.get(this.key[index]);
       let newCharCode = letter.charCodeAt(0) + (howManyToBump || 0);
-      if (newCharCode > 122) newCharCode = newCharCode - 122 + 97;
+      if (newCharCode > 122) newCharCode = newCharCode - 122 + 96;
       return String.fromCharCode(newCharCode);
     }).join('');
   }
@@ -52,7 +52,7 @@ export class SimpleCipher {
     return term.split('').map((letter, index) => {
       const howManyToSubtract = this.valueMapper.get(this.key[index]);
       let newCharCode = letter.charCodeAt(0) - (howManyToSubtract || 0);
-      // if (newCharCode < 98) newCharCode = newCharCode + 122 - 97;
+      if (newCharCode < 97) newCharCode = newCharCode + 122 - 96;
       return String.fromCharCode(newCharCode);
     }).join('');
   }

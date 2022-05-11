@@ -96,15 +96,3 @@ describe('Substitution cipher', () => {
     )
   })
 })
-
-describe('encoding and decoding sanity checks', () => {
-  const key = 'ddddd';
-  const simpleCipher = new SimpleCipher(key)
-  it('encodes something', () => {
-    expect(simpleCipher.encode('yyyz')).toEqual('cccd')
-  });
-
-  it('decodes something', () => {
-    expect(simpleCipher.decode('cccd')).toEqual('yyyz')
-  });
- })
