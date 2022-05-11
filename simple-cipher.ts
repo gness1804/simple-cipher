@@ -54,8 +54,13 @@ export class SimpleCipher {
   }
 
   public decode(term: string): string {
+    let newKey = this.key;
+    if (this.key.length < term.length) {
+      // make the key repeat for the length of the input term
+      newKey = this.key.padEnd(term.length, this.key)
+    }
     return term.split('').map((letter, index) => {
-      const howManyToSubtract = this.valueMapper.get(this.key[index]);
+      const howManyToSubtract = this.valueMapper.get(newKey[index]);
       let newCharCode = letter.charCodeAt(0) - (howManyToSubtract || 0);
       if (newCharCode < 97) newCharCode = newCharCode + 122 - 96;
       return String.fromCharCode(newCharCode);
